@@ -1,0 +1,122 @@
+/*
+ * StockFlow design tokens.
+ * Base: tema "Classical" (StockFlow Design System.zip) — valores primitivos copiados de styles.css do ZIP.
+ * Camada semântica (--sf-*) e adaptações de produto: ver docs/design-system.md.
+ */
+:root {
+  color-scheme: light;
+
+  /* ── Primitivos do tema Classical ─────────────────────────────────── */
+  --color-bg: #f3f2f2;
+  --color-surface: #eae9e9;
+  --color-text: #201f1d;
+  --color-accent: #b68235;
+  --color-divider: color-mix(in srgb, #201f1d 16%, transparent);
+
+  --color-neutral-100: #f8f4f4;
+  --color-neutral-200: #eae7e7;
+  --color-neutral-300: #d7d3d3;
+  --color-neutral-400: #bab6b6;
+  --color-neutral-500: #9b9797;
+  --color-neutral-600: #7d7979;
+  --color-neutral-700: #605d5d;
+  --color-neutral-800: #444141;
+  --color-neutral-900: #2d2b2b;
+
+  --color-accent-100: #fff3e4;
+  --color-accent-200: #ffe3bf;
+  --color-accent-300: #facb8d;
+  --color-accent-400: #e1ad66;
+  --color-accent-500: #c28d41;
+  --color-accent-600: #a06f24;
+  --color-accent-700: #7d5411;
+  --color-accent-800: #5a3b0a;
+  --color-accent-900: #3a270d;
+
+  /* ── Tipografia ───────────────────────────────────────────────────── */
+  --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-heading-weight: 600;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-md: 0.9375rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.25rem;
+
+  /* ── Espaçamento (escala do tema, densidade 1.15×) ────────────────── */
+  --space-1: 4.6px;
+  --space-2: 9.2px;
+  --space-3: 13.8px;
+  --space-4: 18.4px;
+  --space-6: 27.6px;
+  --space-8: 36.8px;
+  --space-12: 55.2px;
+
+  /* ── Raios ────────────────────────────────────────────────────────── */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 7px;
+  /* Adaptações de produto (protótipo StockFlow.dc.html) */
+  --radius-control: 10px;
+  --radius-card: 12px;
+  --radius-pill: 999px;
+
+  /* ── Elevação ─────────────────────────────────────────────────────── */
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
+
+  /* ── Movimento ────────────────────────────────────────────────────── */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ── Semânticos de superfície e texto ─────────────────────────────── */
+  --sf-bg: var(--color-bg);
+  --sf-surface: var(--color-neutral-100);
+  --sf-surface-sunken: var(--color-surface);
+  --sf-border: var(--color-divider);
+  --sf-border-strong: color-mix(in srgb, var(--color-text) 45%, transparent);
+  --sf-text: var(--color-text);
+  /* neutral-700 sobre o fundo ≈ 5,6:1 — substitui o "text 55%" do tema, que reprovava AA */
+  --sf-text-muted: var(--color-neutral-700);
+  /* O accent puro tem ~3:1: serve a bordas e ícones. Texto/links usam o passo 700. */
+  --sf-accent: var(--color-accent);
+  --sf-accent-text: var(--color-accent-700);
+  --sf-accent-text-strong: var(--color-accent-900);
+  --sf-accent-soft: var(--color-accent-100);
+  --sf-focus-ring: 2px solid var(--color-accent-600);
+
+  /* ── Estados de interação ─────────────────────────────────────────── */
+  --sf-hover-accent: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  --sf-active-accent: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  --sf-hover-neutral: color-mix(in srgb, var(--color-text) 7%, transparent);
+  --sf-active-neutral: color-mix(in srgb, var(--color-text) 14%, transparent);
+  --sf-disabled-opacity: 0.5;
+  --sf-overlay: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+
+  /* ── Cores semânticas de status (protótipo, convertidas em tokens) ── */
+  --sf-ok-bg: oklch(0.97 0.03 150);
+  --sf-ok-fg: oklch(0.4 0.1 150);
+  --sf-ok-border: oklch(0.75 0.08 150);
+  --sf-warn-bg: oklch(0.97 0.04 85);
+  --sf-warn-fg: oklch(0.42 0.1 70);
+  --sf-warn-border: oklch(0.78 0.1 85);
+  --sf-bad-bg: oklch(0.97 0.02 28);
+  --sf-bad-fg: oklch(0.42 0.16 28);
+  --sf-bad-border: oklch(0.75 0.09 28);
+  --sf-info-bg: oklch(0.97 0.02 250);
+  --sf-info-fg: oklch(0.4 0.09 250);
+  --sf-info-border: oklch(0.78 0.06 250);
+
+  /* ── Layout ───────────────────────────────────────────────────────── */
+  --sidebar-width: 248px;
+  --sidebar-width-collapsed: 68px;
+  --topbar-height: 56px;
+  --content-max-width: 1320px;
+  --breakpoint-lg: 960px;
+}
