@@ -2,7 +2,7 @@
 
 Sistema full stack de gestão comercial e controle de estoque para pequenas e médias empresas.
 
-> **Status:** Entrega 1 de 5 — fundação técnica, arquitetura e design system. Nenhuma regra de negócio foi implementada ainda.
+> **Status:** Entrega 2 de 5 — navegação, dashboard comercial e experiência da aplicação. O dashboard usa **dados demonstrativos**; nenhum módulo operacional (vendas, estoque…) foi implementado ainda.
 
 ## Objetivo
 
@@ -66,7 +66,7 @@ npm run dev                 # http://localhost:5173
 
 ## Variáveis de ambiente
 
-Documentadas em [`.env.example`](.env.example). Backend: `DB_URL`, `DB_USER`, `DB_PASSWORD`, `CORS_ALLOWED_ORIGINS`, `SPRINGDOC_ENABLED`, `SERVER_PORT`. Frontend: `VITE_API_BASE_URL` (ver `frontend/.env.example`). Nenhum segredo é versionado; `.env` está no `.gitignore`.
+Documentadas em [`.env.example`](.env.example). Backend: `DB_URL`, `DB_USER`, `DB_PASSWORD`, `CORS_ALLOWED_ORIGINS`, `SPRINGDOC_ENABLED`, `SERVER_PORT`. Frontend: `VITE_API_BASE_URL` e `VITE_DASHBOARD_SOURCE` (`mock` padrão | `api`; ver `frontend/.env.example`). Nenhum segredo é versionado; `.env` está no `.gitignore`.
 
 ## Testes
 
@@ -78,19 +78,20 @@ cd frontend && npm run lint && npm run typecheck && npm test && npm run build
 ## Documentação
 
 - [Arquitetura](docs/architecture.md)
+- [Dashboard: origem dos dados, período e contrato da API](docs/dashboard.md)
 - [Design system](docs/design-system.md) — a rota `/componentes` (somente `npm run dev`) mostra todos os componentes.
 - Swagger UI em `/swagger-ui.html` (liberado apenas para leitura; desative com `SPRINGDOC_ENABLED=false`).
 
 ## Situação atual
 
-Implementado: backend com segurança deny-by-default, health check, Flyway, erro padronizado, OpenAPI; frontend com layout administrativo responsivo, design system, dashboard **com dados mockados** e placeholders dos módulos; Docker e CI.
+Implementado: backend com segurança deny-by-default, health check, Flyway, erro padronizado, OpenAPI; frontend com sidebar agrupada e recolhível, topbar com breadcrumbs, busca global (páginas e módulos), notificações (demonstrativas), dashboard comercial com filtro de período na URL e gráficos (Recharts), páginas de indisponibilidade para os módulos futuros; Docker e CI.
 
-Não implementado (por escopo): autenticação, usuários, CRUDs, pedidos, estoque, relatórios, auditoria.
+Não implementado (por escopo): autenticação, usuários, CRUDs, pedidos, estoque, relatórios, auditoria e endpoints do dashboard (o contrato está documentado).
 
 ## Roadmap
 
-1. **Fundação e design system** — esta entrega.
-2. Autenticação JWT, usuários, papéis e configurações.
-3. Catálogo e cadastros: produtos, categorias, clientes e fornecedores.
-4. Estoque e pedidos: movimentações, reservas, vendas, compras, devoluções e concorrência.
-5. Dashboard real, relatórios, auditoria e endurecimento.
+1. **Fundação e design system** — concluída.
+2. **Navegação e dashboard comercial** — esta entrega (dados demonstrativos).
+3. Autenticação, usuários e papéis; catálogo e cadastros (produtos, categorias, clientes, fornecedores).
+4. Estoque e pedidos: movimentações, reservas, vendas, compras, devoluções e concorrência; endpoints reais do dashboard.
+5. Relatórios, auditoria e endurecimento.

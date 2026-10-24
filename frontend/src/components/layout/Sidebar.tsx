@@ -1,6 +1,7 @@
-import { Palette, PanelLeftClose, PanelLeftOpen } from 'lucide-react'
-import { NavLink, Link } from 'react-router-dom'
-import { dashboardItem, moduleGroups, type NavGroup, type NavItem } from '@/app/navigation'
+import { PanelLeftClose, PanelLeftOpen } from 'lucide-react'
+import { Link, NavLink } from 'react-router-dom'
+import { componentsItem, navigation, type NavItem } from '@/app/navigation'
+import { ROUTES } from '@/app/routes'
 import { IconButton, Tooltip } from '@/components/ui'
 import { useHealth } from '@/hooks/useHealth'
 import { cn } from '@/lib/cn'
@@ -13,12 +14,10 @@ interface SidebarProps {
   onNavigate?: () => void
 }
 
-const groups: NavGroup[] = [{ items: [dashboardItem] }, ...moduleGroups]
-
 function SidebarLink({ item, collapsed, onNavigate }: { item: NavItem; collapsed: boolean; onNavigate?: () => void }) {
   const Icon = item.icon
   const link = (
-    <NavLink to={item.to} end={item.to === '/'} className="sf-nav-link" onClick={onNavigate}>
+    <NavLink to={item.to} end={item.to === ROUTES.dashboard} className="sf-nav-link" onClick={onNavigate}>
       <Icon size={18} aria-hidden="true" />
       <span className={cn(collapsed && 'sf-visually-hidden')}>{item.label}</span>
     </NavLink>
@@ -49,7 +48,7 @@ export function Sidebar({ collapsed = false, onToggleCollapsed, onNavigate }: Si
     <div className={cn('sf-sidebar', collapsed && 'sf-sidebar--collapsed')}>
       <div className="sf-sidebar__header">
         {!collapsed && (
-          <Link to="/" className="sf-brand" onClick={onNavigate} aria-label="StockFlow — ir para o Dashboard">
+          <Link to={ROUTES.dashboard} className="sf-brand" onClick={onNavigate} aria-label="StockFlow — ir para o Dashboard">
             Stock<span>Flow</span>
           </Link>
         )}
@@ -65,23 +64,23 @@ export function Sidebar({ collapsed = false, onToggleCollapsed, onNavigate }: Si
       </div>
 
       <nav className="sf-sidebar__nav" aria-label="Navegação principal">
-        {groups.map((group, index) => (
-          <div key={group.label ?? index} className={cn('sf-nav-group', !group.label && index > 1 && 'sf-nav-group--ruled')}>
-            {group.label && <div className="sf-nav-group__label">{group.label}</div>}
-            <ul className="sf-nav-list">
+        {navigation.map((group) => (
+          <div key={group.label} className="sf-nav-group">
+            <div className="sf-nav-group__label">{group.label}</div>
+            <ul className="sf-nav-list" aria-label={group.label}>
               {group.items.map((item) => (
                 <SidebarLink key={item.to} item={item} collapsed={collapsed} onNavigate={onNavigate} />
               ))}
-              {import.meta.env.DEV && index === groups.length - 1 && (
-                <SidebarLink
-                  item={{ to: '/componentes', label: 'Componentes (dev)', icon: Palette }}
-                  collapsed={collapsed}
-                  onNavigate={onNavigate}
-                />
-              )}
             </ul>
           </div>
         ))}
+        {import.meta.env.DEV && (
+          <div className="sf-nav-group">
+            <ul className="sf-nav-list" aria-label="Desenvolvimento">
+              <SidebarLink item={componentsItem} collapsed={collapsed} onNavigate={onNavigate} />
+            </ul>
+          </div>
+        )}
       </nav>
 
       <ApiStatus collapsed={collapsed} />

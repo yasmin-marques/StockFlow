@@ -83,3 +83,16 @@
 @keyframes sf-dialog-in { from { opacity: 0; transform: translate(-50%, -48%); } }
 @keyframes sf-slide-right { from { transform: translateX(100%); } }
 @keyframes sf-slide-left { from { transform: translateX(-100%); } }
+
+.sf-popover {
+  z-index: 65;
+  width: min(380px, calc(100vw - 24px));
+  max-height: min(480px, calc(100vh - 100px));
+  overflow: auto;
+  background: var(--sf-surface);
+  border: 1px solid var(--sf-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-lg);
+}
+.sf-popover[data-state='open'] { animation: sf-popover-in var(--duration-base) var(--ease-standard); }
+@keyframes sf-popover-in { from { opacity: 0; transform: translateY(-4px); } }

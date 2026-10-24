@@ -1,18 +1,13 @@
 import { Hammer } from 'lucide-react'
 import type { ModuleItem } from '@/app/navigation'
 import { Badge, Card, CardBody, CardHeader, EmptyState } from '@/components/ui'
-import '../dashboard/dashboard.css'
 
 /** Página provisória de módulo ainda não implementado — sem formulários nem dados simulados. */
 export function ModulePlaceholderPage({ module }: { module: ModuleItem }) {
   return (
     <div className="sf-page sf-placeholder">
       <Card>
-        <CardHeader
-          title={module.label}
-          kicker="Módulo previsto"
-          action={<Badge tone="info">Entrega {module.delivery}</Badge>}
-        />
+        <CardHeader title={module.label} kicker="Módulo previsto" action={<Badge tone="info">Em breve</Badge>} />
         <CardBody>
           <p>{module.summary}</p>
           <h2 className="sf-placeholder__heading">Escopo previsto</h2>
@@ -26,8 +21,8 @@ export function ModulePlaceholderPage({ module }: { module: ModuleItem }) {
       <Card>
         <EmptyState
           icon={<Hammer size={22} aria-hidden="true" />}
-          title="Ainda não disponível"
-          description={`Este módulo será implementado na Entrega ${module.delivery}. Nenhum dado é exibido ou simulado nesta etapa.`}
+          title="Módulo temporariamente indisponível"
+          description="Este módulo ainda não foi implementado. Nenhum dado é exibido ou simulado."
         />
       </Card>
     </div>

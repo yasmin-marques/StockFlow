@@ -89,3 +89,7 @@
 .sf-toast__description { margin: 0; font-size: var(--text-sm); color: var(--sf-text-muted); }
 @keyframes sf-toast-in { from { opacity: 0; transform: translateY(8px); } }
 @keyframes sf-toast-out { to { opacity: 0; } }
+
+/* Conteúdo em atualização (QueryBoundary) */
+.sf-refreshable { transition: opacity var(--duration-base) var(--ease-standard); }
+.sf-refreshable[data-refreshing='true'] { opacity: 0.55; }

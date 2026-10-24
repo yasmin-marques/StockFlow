@@ -1,0 +1,10 @@
+/* Estruturas de página compartilhadas por dashboard, placeholders e catálogo de componentes. */
+.sf-page { display: flex; flex-direction: column; gap: var(--space-4); }
+
+.sf-grid { display: grid; gap: var(--space-4); }
+.sf-grid--two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); }
+
+.sf-placeholder { max-width: 760px; }
+.sf-placeholder__heading { font-size: var(--text-lg); }
+.sf-placeholder__list { margin: 0; padding-left: var(--space-4); color: var(--sf-text-muted); }
+.sf-placeholder__list li { margin-bottom: var(--space-1); }

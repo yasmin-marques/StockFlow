@@ -30,10 +30,12 @@ Nada implementado ainda. Direção prevista para a Entrega 4: estoque físico/re
 
 - **Estrutura:** `app/` (providers, navegação, rotas de erro), `components/ui` (design system), `components/layout` (shell), `features/` (módulos de negócio), `lib/` (http, erros, env), `services/` (chamadas à API), `hooks/`, `routes/`, `styles/`.
 - **Dados:** TanStack Query para estado de servidor; Axios centralizado em `lib/http.ts`, cujo interceptor converte qualquer falha em `ApiRequestError` (espelha `ApiError` do backend).
-- **Rotas:** `createBrowserRouter`; título e breadcrumbs vêm do `handle` da rota. Módulos futuros usam `ModulePlaceholderPage` gerada a partir de `app/navigation.ts`, fonte única da sidebar e dos placeholders. `/componentes` só existe no build de desenvolvimento (importação dinâmica sob `import.meta.env.DEV`).
 - **UI:** Radix (Dialog, Tooltip, Toast) fornece foco, teclado e ARIA; o visual é CSS próprio sobre tokens. Select é `<select>` nativo estilizado.
-- **Gráficos/animações:** nenhuma biblioteca adicionada. O gráfico do dashboard é SVG simples com dados mockados; a escolha da biblioteca fica para a Entrega 5.
-- **Bundle:** o JS único ainda excede 500 kB (aviso do Vite); a divisão por rota será feita quando houver módulos reais.
+- **Rotas:** `createBrowserRouter`; módulos futuros usam `ModulePlaceholderPage` e `/componentes` só existe no build de desenvolvimento. Caminhos em `app/routes.ts` (nenhuma string solta); `app/navigation.ts` define grupos, ícones e palavras-chave da busca. `handle.crumbs` gera os breadcrumbs (links navegáveis). Ao existir autenticação, as rotas de `AppLayout` ficam sob uma rota-guarda; hoje não há proteção simulada.
+- **Gráficos:** Recharts, carregado sob demanda (`React.lazy`) — ver [dashboard.md](dashboard.md). Animações respeitam `prefers-reduced-motion`.
+- **Dados do dashboard:** `DashboardDataSource` com implementações `mock` (padrão, determinística e sinalizada na UI) e `api` (sem fallback silencioso). Uma query TanStack por seção; `keepPreviousData` nas dependentes do período.
+- **Estados:** `QueryBoundary` padroniza loading, vazio, erro com nova tentativa e "atualizando".
+- **Bundle:** o chunk principal (~630 kB, ~200 kB gzip) ainda dispara o aviso de 500 kB do Vite; o Recharts já fica em chunk separado e lazy. A divisão por rota fica para quando houver módulos reais.
 
 ## Infraestrutura
 

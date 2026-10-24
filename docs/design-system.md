@@ -49,7 +49,9 @@ Observação: Cormorant Garamond usa numerais *old-style*; é o comportamento do
 | `Toast` | `ToastProvider` + `useToast()`; tons `ok, warn, bad, info`; região viva. |
 | `Skeleton` | Decorativo; o contêiner indica `aria-busy`. |
 | `EmptyState`, `ErrorState` | `ErrorState` usa `role="alert"` e botão de nova tentativa opcional. |
-| `Table`, `Th`, `Td` | Legenda acessível, rolagem horizontal, alinhamento numérico à direita. |
+| `Table`, `Th`, `Td` | Legenda acessível, rolagem horizontal, alinhamento numérico à direita; `stackOnMobile` + `label` viram cartões abaixo de 640 px. |
+| `QueryBoundary` | Loading, vazio, erro com retry e "atualizando" (`aria-busy`) para qualquer consulta. |
+| `Popover` | Radix; usado nas notificações. |
 | `Pagination` | `nav` rotulada, `aria-current`, janela de páginas com reticências. |
 
 Exemplos de todas as variantes: rota `/componentes` (apenas `npm run dev`).

@@ -1,8 +1,10 @@
-import { Bell, Menu, Search, UserRound } from 'lucide-react'
-import { Fragment } from 'react'
+import { Menu, UserRound } from 'lucide-react'
 import { useMatches } from 'react-router-dom'
 import type { RouteHandle } from '@/app/routeHandle'
 import { IconButton } from '@/components/ui'
+import { NotificationsMenu } from '@/features/notifications/NotificationsMenu'
+import { GlobalSearch } from '@/features/search/GlobalSearch'
+import { Breadcrumbs } from './Breadcrumbs'
 
 interface TopbarProps {
   onOpenMenu: () => void
@@ -11,7 +13,7 @@ interface TopbarProps {
 function usePageMeta(): RouteHandle {
   const matches = useMatches()
   const handle = [...matches].reverse().find((m) => m.handle)?.handle as RouteHandle | undefined
-  return handle ?? { title: 'StockFlow', crumbs: ['StockFlow'] }
+  return handle ?? { title: 'StockFlow', crumbs: [{ label: 'StockFlow' }] }
 }
 
 export function Topbar({ onOpenMenu }: TopbarProps) {
@@ -27,37 +29,17 @@ export function Topbar({ onOpenMenu }: TopbarProps) {
       />
 
       <div className="sf-topbar__heading">
-        <nav className="sf-breadcrumbs" aria-label="Breadcrumbs">
-          <ol>
-            {crumbs.map((crumb, index) => (
-              <Fragment key={`${crumb}-${index}`}>
-                <li aria-current={index === crumbs.length - 1 ? 'page' : undefined}>{crumb}</li>
-              </Fragment>
-            ))}
-          </ol>
-        </nav>
+        <Breadcrumbs crumbs={crumbs} />
         <h1 className="sf-topbar__title">{title}</h1>
       </div>
 
-      {/* Busca, notificações e perfil ainda não têm backend: ficam visíveis, porém desabilitados. */}
       <div className="sf-topbar__search">
-        <Search size={16} aria-hidden="true" />
-        <input
-          type="search"
-          className="sf-control"
-          placeholder="Buscar — em breve"
-          aria-label="Busca global (indisponível)"
-          disabled
-        />
+        <GlobalSearch />
       </div>
 
-      <IconButton
-        aria-label="Notificações (indisponível)"
-        title="Notificações — em breve"
-        icon={<Bell size={18} aria-hidden="true" />}
-        disabled
-      />
+      <NotificationsMenu />
 
+      {/* Sem autenticação ainda: estado neutro, nenhum usuário fictício apresentado como real. */}
       <div className="sf-profile">
         <div className="sf-profile__text">
           <strong>Perfil indisponível</strong>

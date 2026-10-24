@@ -28,3 +28,15 @@ window.matchMedia =
 
 window.HTMLElement.prototype.scrollIntoView = window.HTMLElement.prototype.scrollIntoView ?? (() => {})
 window.HTMLElement.prototype.hasPointerCapture = window.HTMLElement.prototype.hasPointerCapture ?? (() => false)
+
+// Recharts não calcula layout no jsdom: os gráficos viram stubs que expõem a quantidade de pontos.
+vi.mock('@/features/dashboard/components/charts/RevenueChart', () => ({
+  default: ({ series }: { series: { points: unknown[] } }) => (
+    <div data-testid="revenue-chart" data-points={series.points.length} />
+  ),
+}))
+vi.mock('@/features/dashboard/components/charts/SalesChart', () => ({
+  default: ({ series }: { series: { points: unknown[] } }) => (
+    <div data-testid="sales-chart" data-points={series.points.length} />
+  ),
+}))

@@ -23,7 +23,6 @@ import {
   useToast,
   type BadgeTone,
 } from '@/components/ui'
-import '../dashboard/dashboard.css'
 import './components-demo.css'
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
